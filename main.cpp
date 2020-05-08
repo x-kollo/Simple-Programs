@@ -33,7 +33,6 @@ void DeleteWord(unsigned pos, char* text)
 }
 int main()
 {
-	
 	system("chcp 1251");
 	system("cls");
 	setlocale(0, "ukr");
