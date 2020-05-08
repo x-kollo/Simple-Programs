@@ -39,9 +39,9 @@ int main()
 	char* text = new char[255];
 	char* buffer = new char[255];
 	char** denyword = new char*[255];
-	cout << "¬вед≥ть текст: ";
+	cout << "Enter text: ";
 	cin.getline(text, 255);
-	cout << "¬вед≥ть заборонен≥ л≥тери: ";
+	cout << "Enter deny letters ";
 	cin.getline(buffer, 255);
 	unsigned dw_count = 0;
 	char* ChBuff[1];
@@ -73,7 +73,7 @@ int main()
 			}
 		}
 	}
-	cout << "‘орматовий текст: "  << text << endl;
+	cout << "Formated text: "  << text << endl;
 	for (int i = 0; i < dw_count; i++)
 		delete[] denyword[i];
 	delete[] denyword;
