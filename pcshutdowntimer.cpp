@@ -21,7 +21,7 @@ int main()
 	{
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		timer--;	
-		std::cout << "Комп'ютер вимкнеться через " << timer << " секунд. О " << s1 << std::endl;
+		std::cout << "Computer turn's down in " << timer << " seconds. Time: " << s1 << std::endl;
 	}
 	system("shutdown -s");
 	return 0;
