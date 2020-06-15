@@ -3,9 +3,30 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <windows.h>
 
 class menu
 {
+public:
+enum Color
+{
+    BLACK = '0',
+    BLUE = '1',
+    GREEN = '2',
+    AQUA = '3',
+    RED = '4',
+    PURPLE = '5',
+    YELLOW = '6',
+    WHITE = '7',
+    GRAY = '8',
+    LIGHTBLUE = '9',
+    LIGHTGREEEN = 'A',
+    LIGHTAQUA = 'B',
+    LIGHTRED = 'C',
+    LIGHTPURPUR = 'D',
+    LIGHTYELLOW  = 'E',
+    BRIGHTWHITE  = 'F',
+}; 
 private:
     std::string title;
     std::size_t last_item;
@@ -13,8 +34,10 @@ private:
     char h_fill_symb;
     bool isLeft = false;
     short width = 16;
+    Color colors[2] = {BLACK,WHITE};
     char borders[2] = {'[',']'}; 
 public:
+   
     menu() : title(""), last_item(0), h_fill_symb('-'){};
     menu(std::string Title, std::size_t Last_Item) :  title(Title), last_item(Last_Item), h_fill_symb('-') 
     {
@@ -27,6 +50,11 @@ public:
     std::size_t getItems() { return last_item; }
     std::vector<std::string> & getItemNames() { return item_names; }
 
+    void setColor(Color text,Color background)
+    {
+        this->colors[0] = Color(background);
+        this->colors[1] = Color(text);
+    }
     void setHeadFillSymb(const char h_fill_symb) { this->h_fill_symb = h_fill_symb; } 
     void setLeft(bool pos = true) { isLeft = pos; } 
     void setWidth(int W) { width = W; }
@@ -46,14 +74,19 @@ public:
 
     void ShowMenu()
     {
+        std::string str = "color ";
+        str.push_back(colors[0]);
+        str.push_back(colors[1]);
+        system(str.c_str());
         std::cout << std::setw(width+title.size()) << std::setfill(h_fill_symb) 
         << this->title << std::setw(width) << std::setfill(h_fill_symb) << h_fill_symb << std::endl;
 
         for(std::size_t i = 1;i<=last_item;++i)
              std::cout << borders[0] << i << borders[1] << " " << item_names[i-1] << std::endl;
-            
-
+        
        std::cout << std::setw(width+title.size()) << std::setfill(h_fill_symb) 
         << h_fill_symb  << std::setw(width) << std::setfill(h_fill_symb) << h_fill_symb << std::endl;
+
+       // system("color 07");
     }
 };
