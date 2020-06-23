@@ -34,10 +34,12 @@ private:
     char h_fill_symb;
     bool isLeft = false;
     short width = 16;
-    Color colors[2] = {BLACK,WHITE};
     char borders[2] = {'[',']'}; 
+    Color colors[2] = {BLACK,WHITE};
+    bool buttom = false;
+  //  int size[2] = { 20,30 };
+
 public:
-   
     menu() : title(""), last_item(0), h_fill_symb('-'){};
     menu(std::string Title, std::size_t Last_Item) :  title(Title), last_item(Last_Item), h_fill_symb('-') 
     {
@@ -49,7 +51,13 @@ public:
     std::string getTitle() { return title; }
     std::size_t getItems() { return last_item; }
     std::vector<std::string> & getItemNames() { return item_names; }
-
+  /*  void setSize(int X, int Y)
+    {
+        size[0] = X;
+        size[1] = Y;
+    }*/
+    void setBottomTitle(bool type) {buttom = type;}
+    bool getBottomTitle() { return buttom; }
     void setColor(Color text,Color background)
     {
         this->colors[0] = Color(background);
@@ -71,22 +79,26 @@ public:
     {
         item_names[pos-1] = name;
     }
-
     void ShowMenu()
     {
+
+
         std::string str = "color ";
         str.push_back(colors[0]);
         str.push_back(colors[1]);
         system(str.c_str());
+        str.clear();
         std::cout << std::setw(width+title.size()) << std::setfill(h_fill_symb) 
         << this->title << std::setw(width) << std::setfill(h_fill_symb) << h_fill_symb << std::endl;
 
         for(std::size_t i = 1;i<=last_item;++i)
              std::cout << borders[0] << i << borders[1] << " " << item_names[i-1] << std::endl;
         
-       std::cout << std::setw(width+title.size()) << std::setfill(h_fill_symb) 
+        if(!buttom)
+        std::cout << std::setw(width+title.size()) << std::setfill(h_fill_symb) 
         << h_fill_symb  << std::setw(width) << std::setfill(h_fill_symb) << h_fill_symb << std::endl;
-
-       // system("color 07");
+        else
+        std::cout << std::setw(width+title.size()) << std::setfill(h_fill_symb) 
+        << this->title  << std::setw(width) << std::setfill(h_fill_symb) << h_fill_symb << std::endl;
     }
 };
