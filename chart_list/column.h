@@ -1,29 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <windows.h>
+
 template<typename T>
-class column 
+class column
 {
 private:
-    unsigned short column_id;
-    T cln_buffer;
-public:
-    column() : column_id(0){}
-    column(unsigned short id, T & buffer) : column_id(id), cln_buffer(buffer){}
+    unsigned short colums;
+    std::vector<T> buffer;
+public:   
+    column() : colums(0){}
+    column(unsigned short colums) : colums(colums){}
     ~column(){}
-
-    void setColumn(unsigned short id, T & buffer) 
+    
+    void setToColumn(std::vector<T> & buffer, unsigned short const column_id)
     {
-        column_id = id;
-        this->cln_buffer = buffer;
+        this->buffer = buffer;
+        this->colums = column_id;
     }
-    void clear()
+    void print()
     {
-        this->cln_buffer.clear();
-    }
-  //  friend std::ofstream & operator<<(std::ofstream & os, column & col)
-    void Print()
-    {
-        for(auto el : cln_buffer)
+        COORD crd;
+        crd.X = 0;
+        crd.Y = 0;
+        for(auto el : buffer)
         {
-            std::cout << el <<std::endl;
+            for(unsigned short i = 0;i<(colums);i++)
+                std::cout<<"\t\t";
+            std::cout << el << std::endl;           
         }
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),crd);
+       // std::cout<<"\033[<N>A";
     }
 };
