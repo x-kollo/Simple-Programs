@@ -43,7 +43,6 @@ int main()
 						std::cout << std::fixed << std::setprecision(2) << "\r[" << prc << "%] Lines: " << i << " Time: " << ((double)time.count() / 1000) << "s";
 						if (input.eof())
 							break;
-						//	system("cls");
 					}
 
 				}
